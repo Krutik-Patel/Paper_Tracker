@@ -22,6 +22,13 @@ function delete_paper(index) {
     console.log("paper deleted")
 }
 
+function add_paper() {
+    paper_list.push(new Paper(document.getElementById("file-input").value));
+    list_papers();
+    console.log(paper_list);
+    saveListToLocalStorage(paper_list);
+}
+
 function list_papers() {
     output.innerHTML = "";
     for (let i = 0; i < paper_list.length; i++) {
@@ -41,18 +48,17 @@ function list_papers() {
     console.log("papers listed");
 };
 
-
 let paper_list = getListFromLocalStorage();
-
-add_btn = document.getElementById("add-btn");
+add_btn = document.getElementById("file-input");
 output = document.getElementById("paper-list-ul");
 
 
-add_btn.addEventListener("click", () => {
-    paper_list.push(new Paper(document.getElementById("file-input").value));
-    list_papers();
-    console.log(paper_list);
-    saveListToLocalStorage(paper_list);
+document.addEventListener('DOMContentLoaded', list_papers());
+
+
+add_btn.addEventListener("change", () => {
+    add_paper();
+    console.log("paper added");
 });
 
 
